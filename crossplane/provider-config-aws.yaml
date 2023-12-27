@@ -4,8 +4,7 @@ metadata:
   name: default
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
-    argocd.argoproj.io/hook: PostSync
-    projectId: testing123
+      argocd.argoproj.io/sync-wave: "-5"
 spec:
   credentials:
     source: Secret
