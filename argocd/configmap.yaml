@@ -13,7 +13,6 @@ data:
       - "*"
       kinds:
       - ProviderConfigUsage 
-      - ProviderConfig
   resource.customizations: |
     "*.upbound.io/*":
       health.lua: |
@@ -21,6 +20,12 @@ data:
           status = "Progressing",
           message = "Provisioning ..."
         }
+
+        if obj.kind == "ProviderConfig" then
+          health_status.status = "Healthy"
+          health_status.message = "Resource is up-to-date."
+          return health_status 
+        end
 
         if obj.status == nil or obj.status.conditions == nil then
           return health_status
